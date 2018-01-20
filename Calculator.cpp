@@ -94,7 +94,7 @@ int main() {
 				cout << "Üs Sonucu = " << pow(num1, num2);
 		}
 
-		cout << "\n\nDevam etmek için bir tuşa basınız....\n";
+		cout << "\n\nDevam etmek için bir tuşa basınız...\n";
 		getch();
 
 }	while (1);
