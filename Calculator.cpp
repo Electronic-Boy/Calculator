@@ -15,40 +15,40 @@ int main() {
 	int choice, carpim = 1;
 	double num1, num2, ans = 0, t, rad, angle;
 
-	setlocale(LC_ALL, "Turkish"); // Türkçe karakter kullanýmýna izin verir.
+	setlocale(LC_ALL, "Turkish"); // Tï¿½rkï¿½e karakter kullanï¿½mï¿½na izin verir.
 
 	do {
 		system("cls"); // Ekran temizlenir.
-		cout << "========== HESAP MAKÝNESÝ ==========" << endl;
-		cout << "         Editör ===> BTU-EEM" << endl;
-		cout << "Ýþleminizi Seçiniz:\n\n";
-		cout << "1) Toplama \n2) Çýkarma\n";
-		cout << "3) Çarpma \n4) Bölme\n";
-		cout << "5) Üs Alma\n6) Kök Alma\n";
-		cout << "7) Faktöriyel\n8) Trigonometrik Deðerler\n";
+		cout << "========== HESAP MAKï¿½NESï¿½ ==========" << endl;
+		cout << "         Editï¿½r ===> BTU-EEM" << endl;
+		cout << "ï¿½ï¿½leminizi Seï¿½iniz:\n\n";
+		cout << "1) Toplama \n2) ï¿½ï¿½karma\n";
+		cout << "3) ï¿½arpma \n4) Bï¿½lme\n";
+		cout << "5) ï¿½s Alma\n6) Kï¿½k Alma\n";
+		cout << "7) Faktï¿½riyel\n8) Trigonometrik Deï¿½erler\n";
 		cout << "9) Logaritma\n\n";
 
 		cin >> choice;
 
-		// Eðer seçim -1 ise döngüden çýksýn.
+		// Eï¿½er seï¿½im -1 ise dï¿½ngï¿½den ï¿½ï¿½ksï¿½n.
 		if (choice == -1) {
 			break;
 		}
 
 		history = fopen("history.txt", "a+");
 
-		// Kök alma iþlemi.
+		// Kï¿½k alma iï¿½lemi.
 		if (choice == 6){
-			cout << "Bir sayý giriniz: ";
+			cout << "Bir sayï¿½ giriniz: ";
 			cin >> num1;
-			cout << num1 << " Sayýsýnýn Karekökü = " << sqrt(num1);
+			cout << num1 << " Sayï¿½sï¿½nï¿½n Karekï¿½kï¿½ = " << sqrt(num1);
 			if (history != NULL) {
-				fprintf(history, "karekök %.3f = %f\n", num1, sqrt(num1));
+				fprintf(history, "karekï¿½k %.3f = %f\n", num1, sqrt(num1));
 			}
 		}
-		// Faktöriyel iþlemi. shifte basarak sað týklýyom
+		// Faktï¿½riyel iï¿½lemi. shifte basarak saï¿½ tï¿½klï¿½yom
 		else if(choice == 7){
-			cout << "Faktöriyelini Almak Ýstediðiniz Sayýyý Giriniz: ";
+			cout << "Faktï¿½riyelini Almak ï¿½stediï¿½iniz Sayï¿½yï¿½ Giriniz: ";
 			cin >> num1;
 			for(int i = 1; i <= num1; i++){
 				carpim *= i;
@@ -56,26 +56,26 @@ int main() {
 			cout << num1 << "! = " << carpim;
 			if (history != NULL) {
 				fprintf(history, "%.0f! = %d\n", num1, carpim);
-				// %f idi deðiþtirdim düzeldi...
+				// %f idi deï¿½iï¿½tirdim dï¿½zeldi...
 			}
 		}
-		// Trigonometrik deðer hesaplama.
+		// Trigonometrik deï¿½er hesaplama.
 		else if(choice == 8){
-			cout << "Açýyý Giriniz: ";
+			cout << "Aï¿½ï¿½yï¿½ Giriniz: ";
 			cin >> angle;
-			cout << "1)Sinüs\n2)Kosinüs\n";
+			cout << "1)Sinï¿½s\n2)Kosinï¿½s\n";
 			cout << "3)Tanjant\n4)Kotanjant\n";
 			cin >> t;
 			rad = angle*(pi/180);
 
 			if(t == 1) {
-				cout << "Sinüs " << angle << "=" << sin(rad);
+				cout << "Sinï¿½s " << angle << "=" << sin(rad);
 				if (history != NULL) {
 					fprintf(history, "sin(%.3f) = %.3f\n", angle, sin(rad));
 				}
 			}
 			else if(t == 2) {
-				cout << "Kosinüs " << angle << "=" << cos(rad);
+				cout << "Kosinï¿½s " << angle << "=" << cos(rad);
 				if (history != NULL) {
 					fprintf(history, "cos(%.3f) = %.3f\n", angle, cos(rad));
 				}
@@ -95,21 +95,21 @@ int main() {
 		}
 		// Logaritma hesaplama.
 		else if(choice == 9){
-			cout << "Tabaný Giriniz: ";
+			cout << "Tabanï¿½ Giriniz: ";
 			cin >> num1;
-			cout << "Deðeri Giriniz: ";
+			cout << "Deï¿½eri Giriniz: ";
 			cin >> num2;
 			ans = log(num2)/log(num1);
-			cout << "Logaritma " << num1 << " Tabanýnda " << num2 << "==> " << ans;
+			cout << "Logaritma " << num1 << " Tabanï¿½nda " << num2 << "==> " << ans;
 			if (history != NULL) {
 				fprintf(history, "log%.0f(%.3f) = %f\n", num1, num2, ans);
 			}
 		}
-		// Diðer iþlemler.
+		// Diï¿½er iï¿½lemler.
 		else {
-			cout << "1. Sayýyý Giriniz: ";
+			cout << "1. Sayï¿½yï¿½ Giriniz: ";
 			cin >> num1;
-			cout << "2. Sayýyý Giriniz: ";
+			cout << "2. Sayï¿½yï¿½ Giriniz: ";
 			cin >> num2;
 
 			if(choice == 1) {
@@ -119,41 +119,41 @@ int main() {
 				}
 			}
 			else if(choice == 2) {
-				cout << "Çýkarma Sonucu = " << num1-num2;
+				cout << "ï¿½ï¿½karma Sonucu = " << num1-num2;
 				if (history != NULL) {
 					fprintf(history, "%.3f - %.3f = %f\n", num1, num2, num1-num2);
 				}
 			}
 			else if(choice == 3) {
-				cout << "Çarpma Sonucu = " << num1*num2;
+				cout << "ï¿½arpma Sonucu = " << num1*num2;
 				if (history != NULL) {
 					fprintf(history, "%.3f * %.3f = %f\n", num1, num2, num1*num2);
 				}
 			}
 			else if(choice == 4) {
-				cout << "Bölme Sonucu = " << num1/num2;
+				cout << "Bï¿½lme Sonucu = " << num1/num2;
 				if (history != NULL) {
 					fprintf(history, "%.3f / %.3f = %f\n", num1, num2, num1/num2);
 				}
 			}
 			else if(choice == 5) {
-				cout << "Üs Sonucu = " << pow(num1, num2);
+				cout << "ï¿½s Sonucu = " << pow(num1, num2);
 				if (history != NULL) {
 					fprintf(history, "%.3f ^ %.3f = %f\n", num1, num2, pow(num1, num2));
 				}
 			}
 		}
 
-		cout << "\n\nDevam etmek için bir tuþa basýnýz...\n";
-		cout << "---Programý sonlandýrmak için Esc tuþuna basýnýz.---\n\n";
-		ext = getche(); // Bu fonksiyon ile girilen karakteri alýp ext deðiþkenine kaydediyoruz.
-		// Bu fonksiyon sayesinde sadece karakter deðil esc gibi tuþlarýda alabiliyoruz.
-		// Bunu daha sonra burda kontrol ederek esc mi deðil mi dye
-		// 27 deðeride esc nin ascii deki karþýlýðý. Tamam mý bir sorun varmý
+		cout << "\n\nDevam etmek iï¿½in bir tuï¿½a basï¿½nï¿½z...\n";
+		cout << "---Programï¿½ sonlandï¿½rmak iï¿½in Esc tuï¿½una basï¿½nï¿½z.---\n\n";
+		ext = getche(); // Bu fonksiyon ile girilen karakteri alï¿½p ext deï¿½iï¿½kenine kaydediyoruz.
+		// Bu fonksiyon sayesinde sadece karakter deï¿½il esc gibi tuï¿½larï¿½da alabiliyoruz.
+		// Bunu daha sonra burda kontrol ederek esc mi deï¿½il mi dye
+		// 27 deï¿½eride esc nin ascii deki karï¿½ï¿½lï¿½ï¿½ï¿½. Tamam mï¿½ bir sorun varmï¿½
 
 }	while (ext != 27);
-// Nedense P harfini yazdýrmadý.
-cout << " Programý Kullandýðýnýz Ýçin Teþekkür Ederiz!!!";
+// Nedense P harfini yazdï¿½rmadï¿½.
+cout << " Programï¿½ Kullandï¿½ï¿½ï¿½nï¿½z ï¿½ï¿½in Teï¿½ekkï¿½r Ederiz!!!";
 
 	return 0;
 }
