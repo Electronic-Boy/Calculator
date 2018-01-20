@@ -3,103 +3,157 @@
 #include <cstdlib>
 #include <locale.h>
 #include <conio.h>
+#include <cstdio>
 #define pi  3.14159265
 
 using namespace std;
 
 int main() {
 
+	FILE *history;
+	char ext;
 	int choice, carpim = 1;
 	double num1, num2, ans = 0, t, rad, angle;
 
-	setlocale(LC_ALL, "Turkish"); // Türkçe karakter kullanýmýna izin verir.
+	setlocale(LC_ALL, "Turkish"); // TÃ¼rkÃ§e karakter kullanÄ±mÄ±na izin verir.
 
 	do {
 		system("cls"); // Ekran temizlenir.
-		cout << "========== HESAP MAKÝNESÝ ==========" << endl;
-		cout << "         Editör ===> BTU-EEM" << endl;
-		cout << "Ýþleminizi Seçiniz:\n\n";
-		cout << "1) Toplama \n2) Çýkarma\n";
-		cout << "3) Çarpma \n4) Bölme\n";
-		cout << "5) Üs Alma\n6) Kök Alma\n";
-		cout << "7) Faktöriyel\n8) Trigonometrik Deðerler\n";
+		cout << "========== HESAP MAKÄ°NESÄ° ==========" << endl;
+		cout << "         EditÃ¶r ===> BTU-EEM" << endl;
+		cout << "Ä°ÅŸleminizi SeÃ§iniz:\n\n";
+		cout << "1) Toplama \n2) Ã‡Ä±karma\n";
+		cout << "3) Ã‡arpma \n4) BÃ¶lme\n";
+		cout << "5) Ãœs Alma\n6) KÃ¶k Alma\n";
+		cout << "7) FaktÃ¶riyel\n8) Trigonometrik DeÄŸerler\n";
 		cout << "9) Logaritma\n\n";
-		cout << "---Programý sonlandýrmak için -1 deðerini giriniz.---\n\n";
 
 		cin >> choice;
 
-		// Eðer seçim -1 ise döngüden çýksýn.
+		// EÄŸer seÃ§im -1 ise dÃ¶ngÃ¼den Ã§Ä±ksÄ±n.
 		if (choice == -1) {
 			break;
 		}
 
-		// Kök alma iþlemi.
+		history = fopen("history.txt", "a+");
+
+		// KÃ¶k alma iÅŸlemi.
 		if (choice == 6){
-			cout << "Bir sayý giriniz: ";
+			cout << "Bir sayÄ± giriniz: ";
 			cin >> num1;
-			cout << num1 << " Sayýsýnýn Karekökü = " << sqrt(num1);
+			cout << num1 << " SayÄ±sÄ±nÄ±n KarekÃ¶kÃ¼ = " << sqrt(num1);
+			if (history != NULL) {
+				fprintf(history, "karekÃ¶k %.3f = %f\n", num1, sqrt(num1));
+			}
 		}
-		// Faktöriyel iþlemi.
+		// FaktÃ¶riyel iÅŸlemi. shifte basarak saÄŸ tÄ±klÄ±yom
 		else if(choice == 7){
-			cout << "Faktöriyelini Almak Ýstediðiniz Sayýyý Giriniz: ";
+			cout << "FaktÃ¶riyelini Almak Ä°stediÄŸiniz SayÄ±yÄ± Giriniz: ";
 			cin >> num1;
 			for(int i = 1; i <= num1; i++){
 				carpim *= i;
 			}
 			cout << num1 << "! = " << carpim;
+			if (history != NULL) {
+				fprintf(history, "%.0f! = %d\n", num1, carpim);
+				// %f idi deÄŸiÅŸtirdim dÃ¼zeldi...
+			}
 		}
-		// Trigonometrik deðer hesaplama.
+		// Trigonometrik deÄŸer hesaplama.
 		else if(choice == 8){
-			cout << "Açýyý Giriniz: ";
+			cout << "AÃ§Ä±yÄ± Giriniz: ";
 			cin >> angle;
-			cout << "1)Sinüs\n2)Kosinüs\n";
+			cout << "1)SinÃ¼s\n2)KosinÃ¼s\n";
 			cout << "3)Tanjant\n4)Kotanjant\n";
 			cin >> t;
 			rad = angle*(pi/180);
 
-			if(t == 1)
-				cout << "Sinüs " << angle << "=" << sin(rad);
-			else if(t == 2)
-				cout << "Kosinüs " << angle << "=" << cos(rad);
-			else if(t == 3)
+			if(t == 1) {
+				cout << "SinÃ¼s " << angle << "=" << sin(rad);
+				if (history != NULL) {
+					fprintf(history, "sin(%.3f) = %.3f\n", angle, sin(rad));
+				}
+			}
+			else if(t == 2) {
+				cout << "KosinÃ¼s " << angle << "=" << cos(rad);
+				if (history != NULL) {
+					fprintf(history, "cos(%.3f) = %.3f\n", angle, cos(rad));
+				}
+			}
+			else if(t == 3) {
 				cout << "Tanjant " << angle << "=" << sin(rad)/cos(rad);
-			else if(t == 4)
+				if (history != NULL) {
+					fprintf(history, "tan(%.3f) = %.3f\n", angle, sin(rad)/cos(rad));
+				}
+			}
+			else if(t == 4) {
 				cout << "Kotanjant " << angle << "=" << cos(rad)/sin(rad);
+				if (history != NULL) {
+					fprintf(history, "cot(%.3f) = %.3f\n", angle, cos(rad)/sin(rad));
+				}
+			}
 		}
 		// Logaritma hesaplama.
 		else if(choice == 9){
-			cout << "Tabaný Giriniz: ";
+			cout << "TabanÄ± Giriniz: ";
 			cin >> num1;
-			cout << "Deðeri Giriniz: ";
+			cout << "DeÄŸeri Giriniz: ";
 			cin >> num2;
 			ans = log(num2)/log(num1);
-			cout << "Logaritma " << num1 << " Tabanýnda " << num2 << "==> " << ans;
+			cout << "Logaritma " << num1 << " TabanÄ±nda " << num2 << "==> " << ans;
+			if (history != NULL) {
+				fprintf(history, "log%.0f(%.3f) = %f\n", num1, num2, ans);
+			}
 		}
-		// Diðer iþlemler.
+		// DiÄŸer iÅŸlemler.
 		else {
-			cout << "1. Sayýyý Giriniz: ";
+			cout << "1. SayÄ±yÄ± Giriniz: ";
 			cin >> num1;
-			cout << "2. Sayýyý Giriniz: ";
+			cout << "2. SayÄ±yÄ± Giriniz: ";
 			cin >> num2;
 
-			if(choice == 1)
+			if(choice == 1) {
 				cout << "Toplama Sonucu = " << num1+num2;
-			else if(choice == 2)
-				cout << "Çýkarma Sonucu = " << num1-num2;
-			else if(choice == 3)
-				cout << "Çarpma Sonucu = " << num1*num2;
-			else if(choice == 4)
-				cout << "Bölme Sonucu = " << num1/num2;
-			else if(choice == 5)
-				cout << "Üs Sonucu = " << pow(num1, num2);
+				if (history != NULL) {
+					fprintf(history, "%.3f + %.3f = %f\n", num1, num2, num1+num2);
+				}
+			}
+			else if(choice == 2) {
+				cout << "Ã‡Ä±karma Sonucu = " << num1-num2;
+				if (history != NULL) {
+					fprintf(history, "%.3f - %.3f = %f\n", num1, num2, num1-num2);
+				}
+			}
+			else if(choice == 3) {
+				cout << "Ã‡arpma Sonucu = " << num1*num2;
+				if (history != NULL) {
+					fprintf(history, "%.3f * %.3f = %f\n", num1, num2, num1*num2);
+				}
+			}
+			else if(choice == 4) {
+				cout << "BÃ¶lme Sonucu = " << num1/num2;
+				if (history != NULL) {
+					fprintf(history, "%.3f / %.3f = %f\n", num1, num2, num1/num2);
+				}
+			}
+			else if(choice == 5) {
+				cout << "Ãœs Sonucu = " << pow(num1, num2);
+				if (history != NULL) {
+					fprintf(history, "%.3f ^ %.3f = %f\n", num1, num2, pow(num1, num2));
+				}
+			}
 		}
 
-		cout << "\n\nDevam etmek için bir tuþa basýnýz...\n";
-		getch();
+		cout << "\n\nDevam etmek iÃ§in bir tuÅŸa basÄ±nÄ±z...\n";
+		cout << "---ProgramÄ± sonlandÄ±rmak iÃ§in Esc tuÅŸuna basÄ±nÄ±z.---\n\n";
+		ext = getche(); // Bu fonksiyon ile girilen karakteri alÄ±p ext deÄŸiÅŸkenine kaydediyoruz.
+		// Bu fonksiyon sayesinde sadece karakter deÄŸil esc gibi tuÅŸlarÄ±da alabiliyoruz.
+		// Bunu daha sonra burda kontrol ederek esc mi deÄŸil mi dye
+		// 27 deÄŸeride esc nin ascii deki karÅŸÄ±lÄ±ÄŸÄ±. Tamam mÄ± bir sorun varmÄ±
 
-}	while (1);
-
-cout << "Programý Kullandýðýnýz Ýçin Teþekkür Ederiz  !!!";
+}	while (ext != 27);
+// Nedense P harfini yazdÄ±rmadÄ±.
+cout << " ProgramÄ± KullandÄ±ÄŸÄ±nÄ±z Ä°Ã§in TeÅŸekkÃ¼r Ederiz!!!";
 
 	return 0;
 }
