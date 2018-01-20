@@ -1,6 +1,6 @@
-# Hesap Makinesi
+#Hesap Makinesi
 
-Özellikleri:
+##Özellikleri:
 
 - Dört işlem
 - Trigonometrik değerleri hesaplama
