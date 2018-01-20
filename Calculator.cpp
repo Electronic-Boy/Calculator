@@ -99,7 +99,7 @@ int main() {
 
 }	while (1);
 
-cout << "Programý Kullandýðýnýz Ýçin Teþekkür Ederiz!!!";
+cout << "Programý Kullandýðýnýz Ýçin Teþekkür Ederiz  !!!";
 
 	return 0;
 }
