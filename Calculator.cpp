@@ -3,12 +3,14 @@
 #include <cstdlib>
 #include <locale.h>
 #include <conio.h>
+#include <cstdio>
 #define pi  3.14159265
 
 using namespace std;
 
 int main() {
 
+	FILE *history;
 	int choice, carpim = 1;
 	double num1, num2, ans = 0, t, rad, angle;
 
@@ -33,11 +35,16 @@ int main() {
 			break;
 		}
 
+		history = fopen("history.txt", "a+");
+
 		// Kök alma işlemi.
 		if (choice == 6){
 			cout << "Bir sayı giriniz: ";
 			cin >> num1;
 			cout << num1 << " Sayısının Karekökü = " << sqrt(num1);
+			if (history != NULL) {
+				fprintf(history, "karekök %.3f = %f\n", num1, sqrt(num1));
+			}
 		}
 		// Faktöriyel işlemi.
 		else if(choice == 7){
@@ -47,6 +54,9 @@ int main() {
 				carpim *= i;
 			}
 			cout << num1 << "! = " << carpim;
+			if (history != NULL) {
+				fprintf(history, "%.0f! = %.0f\n", num1, carpim);
+			}
 		}
 		// Trigonometrik değer hesaplama.
 		else if(choice == 8){
@@ -57,14 +67,30 @@ int main() {
 			cin >> t;
 			rad = angle*(pi/180);
 
-			if(t == 1)
+			if(t == 1) {
 				cout << "Sinüs " << angle << "=" << sin(rad);
-			else if(t == 2)
+				if (history != NULL) {
+					fprintf(history, "sin(%.3f) = %.3f\n", angle, sin(rad));
+				}
+			}
+			else if(t == 2) {
 				cout << "Kosinüs " << angle << "=" << cos(rad);
-			else if(t == 3)
+				if (history != NULL) {
+					fprintf(history, "cos(%.3f) = %.3f\n", angle, cos(rad));
+				}
+			}
+			else if(t == 3) {
 				cout << "Tanjant " << angle << "=" << sin(rad)/cos(rad);
-			else if(t == 4)
+				if (history != NULL) {
+					fprintf(history, "tan(%.3f) = %.3f\n", angle, sin(rad)/cos(rad));
+				}
+			}
+			else if(t == 4) {
 				cout << "Kotanjant " << angle << "=" << cos(rad)/sin(rad);
+				if (history != NULL) {
+					fprintf(history, "cot(%.3f) = %.3f\n", angle, cos(rad)/sin(rad));
+				}
+			}
 		}
 		// Logaritma hesaplama.
 		else if(choice == 9){
@@ -74,6 +100,9 @@ int main() {
 			cin >> num2;
 			ans = log(num2)/log(num1);
 			cout << "Logaritma " << num1 << " Tabanında " << num2 << "==> " << ans;
+			if (history != NULL) {
+				fprintf(history, "log%.0f(%.3f) = %f\n", num1, num2, ans);
+			}
 		}
 		// Diğer işlemler.
 		else {
@@ -82,16 +111,36 @@ int main() {
 			cout << "2. Sayıyı Giriniz: ";
 			cin >> num2;
 
-			if(choice == 1)
+			if(choice == 1) {
 				cout << "Toplama Sonucu = " << num1+num2;
-			else if(choice == 2)
+				if (history != NULL) {
+					fprintf(history, "%.3f + %.3f = %f\n", num1, num2, num1+num2);
+				}
+			}
+			else if(choice == 2) {
 				cout << "Çıkarma Sonucu = " << num1-num2;
-			else if(choice == 3)
+				if (history != NULL) {
+					fprintf(history, "%.3f - %.3f = %f\n", num1, num2, num1-num2);
+				}
+			}
+			else if(choice == 3) {
 				cout << "Çarpma Sonucu = " << num1*num2;
-			else if(choice == 4)
+				if (history != NULL) {
+					fprintf(history, "%.3f * %.3f = %f\n", num1, num2, num1*num2);
+				}
+			}
+			else if(choice == 4) {
 				cout << "Bölme Sonucu = " << num1/num2;
-			else if(choice == 5)
+				if (history != NULL) {
+					fprintf(history, "%.3f / %.3f = %f\n", num1, num2, num1/num2);
+				}
+			}
+			else if(choice == 5) {
 				cout << "Üs Sonucu = " << pow(num1, num2);
+				if (history != NULL) {
+					fprintf(history, "%.3f ^ %.3f = %f\n", num1, num2, pow(num1, num2));
+				}
+			}
 		}
 
 		cout << "\n\nDevam etmek için bir tuşa basınız...\n";
