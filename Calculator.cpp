@@ -4,20 +4,23 @@
 #include <locale.h>
 #include <conio.h>
 #include <cstdio>
-#define pi  3.14159265
+
+#define PI  3.14159265
 
 using namespace std;
 
 int main() {
 
 	FILE *history;
-	int choice, carpim = 1;
+	char ext;
+	int choice, fact = 1;
 	double num1, num2, ans = 0, t, rad, angle;
 
 	setlocale(LC_ALL, "Turkish"); // Türkçe karakter kullanımına izin verir.
 
 	do {
 		system("cls"); // Ekran temizlenir.
+
 		cout << "========== HESAP MAKİNESİ ==========" << endl;
 		cout << "         Editör ===> BTU-EEM" << endl;
 		cout << "İşleminizi Seçiniz:\n\n";
@@ -35,6 +38,7 @@ int main() {
 			break;
 		}
 
+		// Geçmişi kaydetmek için dosya oluşturuyoruz.
 		history = fopen("history.txt", "a+");
 
 		// Kök alma işlemi.
@@ -51,11 +55,11 @@ int main() {
 			cout << "Faktöriyelini Almak İstediğiniz Sayıyı Giriniz: ";
 			cin >> num1;
 			for(int i = 1; i <= num1; i++){
-				carpim *= i;
+				fact *= i;
 			}
-			cout << num1 << "! = " << carpim;
+			cout << num1 << "! = " << fact;
 			if (history != NULL) {
-				fprintf(history, "%.0f! = %.0f\n", num1, carpim);
+				fprintf(history, "%.0f! = %d\n", num1, fact);
 			}
 		}
 		// Trigonometrik değer hesaplama.
@@ -65,7 +69,7 @@ int main() {
 			cout << "1)Sinüs\n2)Kosinüs\n";
 			cout << "3)Tanjant\n4)Kotanjant\n";
 			cin >> t;
-			rad = angle*(pi/180);
+			rad = angle*(PI/180);
 
 			if(t == 1) {
 				cout << "Sinüs " << angle << "=" << sin(rad);
@@ -144,11 +148,11 @@ int main() {
 		}
 
 		cout << "\n\nDevam etmek için bir tuşa basınız...\n";
-		getch();
+		ext = getche();
 
-}	while (1);
+}	while (ext != 27);
 
-cout << "Programı Kullandığınız İçin Teşekkür Ederiz!!!";
+cout << " Programı Kullandığınız İçin Teşekkür Ederiz!!!";
 
 	return 0;
 }
